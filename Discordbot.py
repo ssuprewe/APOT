@@ -27,6 +27,7 @@ Bot = commands.Bot(command_prefix='#', intents=intents)
 Bot.remove_command("help")
 roles = []
 messages = []
+urwelcome = ["sağol","Sağol","SAĞOL","SAGOL","Teşekkürler","TEŞK","teşk","teşekkürler","tesekkürler","tesk","Tesekkürler","Tesekkurler","tesekkurler","eyw","Eyvallah","eyvallah","eyv"]
 selam = ["sa","Sa","SA","sA","selamın aleyküm","Selamın Aleyküm","Selamın aleyküm","selamın Aleyküm","SELAMIN ALEYKÜM"]
 pgifs = ["https://c.tenor.com/szPtb6lqakIAAAAS/beating-up-beating-up-lilo.gif","https://c.tenor.com/FFYqOVVbrJAAAAAC/markiplier-punch.gif","https://c.tenor.com/qKTBsktfhSgAAAAS/punch-blue-hoodie.gif","https://c.tenor.com/-dK24mwTyKwAAAAS/tv-shows-supernatural.gif","https://c.tenor.com/ZwjudWL5JxYAAAAC/kirby-punch.gif"]
 #-------------------------------------------------------------------------------------------------------------------#
@@ -43,6 +44,9 @@ async def on_message(message):
         return
     if message.content in selam:
         await message.channel.send(f"{user.mention} As Kardeşim Hg :wink:")
+    await Bot.process_commands(message)
+    if message.content in urwelcome:
+        await message.channel.send(f"{user.mention} bir şey değil Her zaman kullanıma hazırım.")
     await Bot.process_commands(message)
     
 
@@ -300,7 +304,7 @@ async def shutdown(message):
 async def help(ctx):
     em = discord.Embed(title = "Help", description = "Komutların başına # koyarak aşşağıdaki komutları kullanabilirsin.")
 
-    em.add_field(name ="Moderasyon", value= "//kick • ban • unban • mute • unmute • clear • rename • ar • rr// ")
+    em.add_field(name ="Moderasyon", value= "//kick • ban • unban • mute • unmute • clear • rename// ")
     em.add_field(name ="Eğlence", value="//cm • gay • ungay • pp • punch • gif • cevir//")
 
     await ctx.send(embed = em)
