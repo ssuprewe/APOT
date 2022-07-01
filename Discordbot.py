@@ -300,7 +300,7 @@ async def shutdown(message):
 async def help(ctx):
     em = discord.Embed(title = "Help", description = "Komutların başına # koyarak aşşağıdaki komutları kullanabilirsin.")
 
-    em.add_field(name ="Moderasyon", value= "//kick • ban • unban • mute • unmute • clear • rename// ")
+    em.add_field(name ="Moderasyon", value= "//kick • ban • unban • mute • unmute • clear • rename • ar • rr// ")
     em.add_field(name ="Eğlence", value="//cm • gay • ungay • pp • punch • gif • cevir//")
 
     await ctx.send(embed = em)
