@@ -2,7 +2,6 @@ from concurrent.futures.thread import _shutdown
 from errno import EEXIST
 from logging import shutdown
 from pyexpat.errors import messages
-from re import A, X 
 from typing import Awaitable
 from unittest import async_case
 #from func31 import *
@@ -386,4 +385,4 @@ async def rr(ctx, role: discord.Role, user: discord.Member):
 
 
 
-Bot.run('OTgwNTI1Mzc0NzE2OTM2Mjgy.Gt-UId.J9LPLqG-U9l066Xs2vDn0CcuaXN-5xhDHo_rFI')
+Bot.run('OTgwNTI1Mzc0NzE2OTM2Mjgy.Gupqv-.8MFeO6H7-QomMuGJwim5tUDTzW8udkgB363Kl4')
