@@ -43,7 +43,6 @@ async def on_message(message):
         return
     if message.content in selam:
         await message.channel.send(f"{user.mention} As Kardeşim Hg :wink:")
-    await Bot.process_commands(message)
     if message.content in urwelcome:
         await message.channel.send(f"{user.mention} bir şey değil Her zaman kullanıma hazırım.")
     await Bot.process_commands(message)
@@ -366,7 +365,6 @@ async def snipe(ctx):
     except KeyError: 
         await ctx.send(f"Burada hiç silinen mesaj yok #{channel.name}")
 #------------------------------------------------------------------------------------------------------------#
-
 @Bot.command()
 @commands.has_role("amdin")
 async def ar(ctx, role: discord.Role, user: discord.Member):
