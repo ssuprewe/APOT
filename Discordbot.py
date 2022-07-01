@@ -51,7 +51,7 @@ async def on_message(message):
 @Bot.event
 async def on_command_error(ctx, error):
 	if isinstance(error, commands.CommandOnCooldown):
-		await ctx.send(f"{round(error.retry_after, 2)} saniye kaldı")
+		await ctx.send(f"sakin ol tekrar komut kullanman için {round(error.retry_after, 2)} saniyen var.")
 
 
 async def ch_pr():
@@ -102,6 +102,7 @@ async def mute(ctx, member: discord.Member, *, reason=None):
 #                                                             UNMUTE
 @Bot.command(case_insensitive=True)
 @commands.has_role("amdin")
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def unmute(ctx, member: discord.Member, *, reason=None):
     guild = ctx.guild
     muteRole = discord.utils.get(guild.roles, name = "Muted")
@@ -131,30 +132,38 @@ async def on_member_remove(member):
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                         BOT KOMUTLARI
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def sSupreme(ctx, *args):
     await ctx.send("En iyi Yasuo <@775305718143778836>")
 
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def lua(ctx, *args):
     await ctx.send("En Lua <@589193582473117699>")
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def hileci(ctx, *args):
     await ctx.send("Hileci Orospu Çocugu <@905532694627246150>")
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def feeder(ctx, *args):
     await ctx.send("2-22 Singed Feeder <@533275339728617473> :flushed:")
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def floppa(ctx, *args):
     await ctx.send("Floppa şey değilmi <@533278005368324102>")
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def hentai(ctx, *args):
     await ctx.send("Yürüyen cinsellik <@918845035729027103>")
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def developer(ctx, *args):
     await ctx.send("En developer <@934177779061239859>")
 #---------------------------------------------------------------------------------------------------------------------#
 #                                                            PUNCH
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def punch(ctx,member: discord.Member = None,*args):
     if member == None:
         await ctx.send("Bir etiket gir kendini yumruklayamassın.")
@@ -170,6 +179,7 @@ async def punch(ctx,member: discord.Member = None,*args):
 #--------------------------------------------------------------------------------------------------------------------#
 #                                                            RENAME
 @Bot.command(pass_context=True)
+@commands.cooldown(1, 5, commands.BucketType.user)
 @commands.has_role("amdin")
 async def rename(ctx, member: discord.Member, nick):
     await member.edit(nick=nick)
@@ -178,23 +188,27 @@ async def rename(ctx, member: discord.Member, nick):
 #-------------------------------------------------------------------------------------------------------------------#
 #                                                            CLEAR
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def clear(ctx, amount=5):
     await ctx.channel.purge(limit=amount)
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                            KİCK
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 @commands.has_role("amdin")
 async def kick(ctx, member:discord.Member, *args, reason="yok"):
     await member.kick(reason=reason)
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                            BAN
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 @commands.has_role("amdin")
 async def ban(ctx, member:discord.Member, *args, reason="yok"):
     await member.ban(reason=reason)
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                           UNBAN
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 @commands.has_role("amdin")
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
@@ -245,6 +259,7 @@ def add_new_role(role, emoji):
 #-------------------------------------------------------------------------------------------------------------#
 #                                                         PİNG
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def ping(ctx):
     ms1=f'Pong! {round(Bot.latency * 1000)}ms'
     pig = discord.Embed(
@@ -257,6 +272,7 @@ async def ping(ctx):
 #-------------------------------------------------------------------------------------------------------------#
 #                                                         CM
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def cm(ctx,member: discord.Member=None):
     cm_list = ["8=D","8==D","8===D","8======D","8========D","8===============D","8===========================D","8=D","8==D","8===D","8=D","8==D","8===D"]
     if(member == None):
@@ -270,6 +286,7 @@ async def cm(ctx,member: discord.Member=None):
 #--------------------------------------------------------------------------------------------------------------#
 #                                                          GAY
 @Bot.command(case_insenstive=True)
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def gay(ctx,member: discord.Member=None,*args):
     gayC = random.randint(1,100)
     if(member == None):
@@ -282,11 +299,13 @@ async def gay(ctx,member: discord.Member=None,*args):
 #---------------------------------------------------------------------------------------------------------------#
 #                                                         UNGAY
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def ungay(ctx,member: discord.Member=None,*args):
     await ctx.send(f"{member.mention} Gay olmadığını #ungay kullanarak kanıtladı. Artık Straight.")
 #---------------------------------------------------------------------------------------------------------------#
 #                                                        SHUTDOWN
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 #@commands.has_role("amdin")
 async def shutdown(message):
     id = message.author.id
@@ -304,6 +323,7 @@ async def shutdown(message):
 #---------------------------------------------------------------------------------------------------------------#
 #                                                      CUSTOM HELP
 @Bot.group(invoke_without_command=True)
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def help(ctx):
     em = discord.Embed(title = "Help", description = "Komutların başına # koyarak aşşağıdaki komutları kullanabilirsin.")
 
@@ -314,6 +334,7 @@ async def help(ctx):
 #---------------------------------------------------------------------------------------------------------------#
 #                                                         AVATAR
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def pp(ctx, member: discord.Member = None):
     if member == None:
         member = ctx.author
@@ -325,6 +346,7 @@ async def pp(ctx, member: discord.Member = None):
 #---------------------------------------------------------------------------------------------------------------#
 #                                                           GİF
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def gif(ctx, *,q="Smile"):
 
     api_key = "qtC2GU1CezSTlPOrOMBdby6IFjB5IEIy"
@@ -361,6 +383,7 @@ async def on_message_delete(message):
      del snipe_message_content[message.channel.id]
 
 @Bot.command(name = 'snipe')
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def snipe(ctx):
     channel = ctx.channel
     try:
@@ -370,19 +393,22 @@ async def snipe(ctx):
     except KeyError: 
         await ctx.send(f"Burada hiç silinen mesaj yok #{channel.name}")
 #------------------------------------------------------------------------------------------------------------#
+#                                                      ROL EKLE AL
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 @commands.has_role("amdin")
 async def ar(ctx, role: discord.Role, user: discord.Member):
     await user.add_roles(role)
     await ctx.send(f"{role.mention} Rolü {user.mention} Kişisine verildi.")
 
 @Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
 @commands.has_role("amdin")
 async def rr(ctx, role: discord.Role, user: discord.Member):
     await user.remove_roles(role)
     await ctx.send(f"{role.mention} Rolü {user.mention} Kişisinden alındı.")
 
-
+#------------------------------------------------------------------------------------------------------------#
 
 
 
