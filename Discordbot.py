@@ -2,6 +2,7 @@ from concurrent.futures.thread import _shutdown
 from errno import EEXIST
 from logging import shutdown
 from pyexpat.errors import messages
+from re import A, X 
 from typing import Awaitable
 from unittest import async_case
 #from func31 import *
@@ -47,7 +48,10 @@ async def on_message(message):
         await message.channel.send(f"{user.mention} bir şey değil Her zaman kullanıma hazırım.")
     await Bot.process_commands(message)
     
-
+@Bot.event
+async def on_command_error(ctx, error):
+	if isinstance(error, commands.CommandOnCooldown):
+		await ctx.send(f"{round(error.retry_after, 2)} saniye kaldı")
 
 
 async def ch_pr():
@@ -81,13 +85,14 @@ async def on_reaction_add(reaction, user):
 
 @Bot.command(case_insenstive=True)
 @commands.has_role("amdin")
+@commands.cooldown(1, 5, commands.BucketType.user)
 async def mute(ctx, member: discord.Member, *, reason=None):
     if reason == None:
         await ctx.send("Lütfen bir sebep yazın!")
         return
     guild = ctx.guild
     muteRole = discord.utils.get(guild.roles, name = "Muted")
-    testrole1 = discord.utils.get(guild.roles, name = "SLOT・✔️")
+    testrole1 = discord.utils.get(guild.roles, name = "SLOT")
     
 
     await member.add_roles(muteRole, reason=reason)
@@ -100,7 +105,7 @@ async def mute(ctx, member: discord.Member, *, reason=None):
 async def unmute(ctx, member: discord.Member, *, reason=None):
     guild = ctx.guild
     muteRole = discord.utils.get(guild.roles, name = "Muted")
-    testrole1 = discord.utils.get(guild.roles, name = "SLOT・✔️")
+    testrole1 = discord.utils.get(guild.roles, name = "SLOT")
     
 
     if not muteRole:
