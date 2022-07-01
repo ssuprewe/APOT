@@ -1,7 +1,8 @@
 from concurrent.futures.thread import _shutdown
+from errno import EEXIST
 from logging import shutdown
 from pyexpat.errors import messages
-from re import A 
+from re import A, X 
 from typing import Awaitable
 from unittest import async_case
 #from func31 import *
@@ -362,13 +363,18 @@ async def snipe(ctx):
     except KeyError: 
         await ctx.send(f"Burada hiç silinen mesaj yok #{channel.name}")
 #------------------------------------------------------------------------------------------------------------#
+
 @Bot.command()
-async def nasılsın(message):
-    id = message.author.id
-    if id == 905532694627246150:
-       await message.send('İyiyim patron, siz nasılsınız? Bugün napıyoruz?')
-    else:
-        await message.send('İyiyim efendim, siz nasılsınız?')
+@commands.has_role("amdin")
+async def ar(ctx, role: discord.Role, user: discord.Member):
+    await user.add_roles(role)
+    await ctx.send(f"{role.mention} Rolü {user.mention} Kişisine verildi.")
+
+@Bot.command()
+@commands.has_role("amdin")
+async def rr(ctx, role: discord.Role, user: discord.Member):
+    await user.remove_roles(role)
+    await ctx.send(f"{role.mention} Rolü {user.mention} Kişisinden alındı.")
 
 
 
