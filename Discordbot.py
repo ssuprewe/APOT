@@ -207,13 +207,12 @@ async def ban(ctx, member:discord.Member, *args, reason="yok"):
     await member.ban(reason=reason)
 
 @Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def YASAK(ctx, member:discord.Member, *args, reason="yok"):
+async def banned(message):
     id = message.author.id
-    if id == 775305718143778836:
-        await member.ban(reason=reason)
+    if id == 775305718143778836: 
+		await member.ban(reason=reason)
     else:
-        await ctx.send("Boyle bir yetkiye sahip degilsin")
+	ctx.send("olmaz")
 	
 
 #-------------------------------------------------------------------------------------------------------------------#    
