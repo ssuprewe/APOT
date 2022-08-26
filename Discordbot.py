@@ -207,12 +207,12 @@ async def ban(ctx, member:discord.Member, *args, reason="yok"):
     await member.ban(reason=reason)
 
 @Bot.command()
-async def banned(message):
+async def banned(ctx, member:discord.Member, *args, reason="yok")
     id = message.author.id
-    if id == 775305718143778836: 
-		await member.ban(reason=reason)
+    if id == 775305718143778836:
+        await member.ban(reason=reason)
     else:
-	ctx.send("olmaz")
+        ctx.send("olmas")
 	
 
 #-------------------------------------------------------------------------------------------------------------------#    
