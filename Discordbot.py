@@ -8,6 +8,7 @@ from unittest import async_case
 #from func31 import *
 import discord
 from discord.ext import commands
+from discord.ext.commands import has_permissions
 import os
 from time import sleep
 import random
@@ -84,7 +85,7 @@ async def on_reaction_add(reaction, user):
 
 
 @Bot.command(case_insenstive=True)
-@commands.has_role("amdin")
+@has_permissions(administrator=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def mute(ctx, member: discord.Member, *, reason=None):
     if reason == None:
@@ -101,7 +102,7 @@ async def mute(ctx, member: discord.Member, *, reason=None):
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                             UNMUTE
 @Bot.command(case_insensitive=True)
-@commands.has_role("amdin")
+@has_permissions(administrator=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def unmute(ctx, member: discord.Member, *, reason=None):
     guild = ctx.guild
@@ -180,7 +181,7 @@ async def punch(ctx,member: discord.Member = None,*args):
 #                                                            RENAME
 @Bot.command(pass_context=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
-@commands.has_role("amdin")
+@has_permissions(administrator=True)
 async def rename(ctx, member: discord.Member, nick):
     await member.edit(nick=nick)
     await ctx.send(f'Takma adı şunun ile değiştirildi {member.mention} ')
@@ -194,15 +195,15 @@ async def clear(ctx, amount=5):
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                            KİCK
 @Bot.command()
+@has_permissions(kick_members = True)
 @commands.cooldown(1, 5, commands.BucketType.user)
-@commands.has_role("amdin")
 async def kick(ctx, member:discord.Member, *args, reason="yok"):
     await member.kick(reason=reason)
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                            BAN
 @Bot.command()
+@has_permissions(ban_members = True)
 @commands.cooldown(1, 5, commands.BucketType.user)
-@commands.has_role("amdin")
 async def ban(ctx, member:discord.Member, *args, reason="yok"):
     await member.ban(reason=reason)
 
@@ -218,8 +219,8 @@ async def banned(ctx, member:discord.Member, *args, reason="yok"):
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                           UNBAN
 @Bot.command()
+@has_permissions(ban_members = True)
 @commands.cooldown(1, 5, commands.BucketType.user)
-@commands.has_role("amdin")
 async def unban(ctx, *, member):
     banned_users = await ctx.guild.bans()
     member_name, member_discriminator = member.split('#')
@@ -316,7 +317,6 @@ async def ungay(ctx,member: discord.Member=None,*args):
 #                                                        SHUTDOWN
 @Bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
-#@commands.has_role("amdin")
 async def shutdown(message):
     id = message.author.id
     if id == 775305718143778836: 
@@ -405,15 +405,15 @@ async def snipe(ctx):
 #------------------------------------------------------------------------------------------------------------#
 #                                                      ROL EKLE AL
 @Bot.command()
+@has_permissions(manage_roles=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
-@commands.has_role("amdin")
 async def ar(ctx, role: discord.Role, user: discord.Member):
     await user.add_roles(role)
     await ctx.send(f"{role.mention} Rolü {user.mention} Kişisine verildi.")
 
 @Bot.command()
+@has_permissions(manage_roles=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
-@commands.has_role("amdin")
 async def rr(ctx, role: discord.Role, user: discord.Member):
     await user.remove_roles(role)
     await ctx.send(f"{role.mention} Rolü {user.mention} Kişisinden alındı.")
