@@ -58,7 +58,7 @@ async def on_command_error(ctx, error):
 async def ch_pr():
     await Bot.wait_until_ready()
 
-    statuses = ["//Abdullahogus", "Selam ben Apot", "#help//Abdullahogus","#help","Cemi Götten Sikiyor"]
+    statuses = ["//Abdullahogus", "Selam ben Apot", "#help//Abdullahogus","#help"]
 
     while not Bot.is_closed():
         status = random.choice(statuses)
@@ -132,35 +132,7 @@ async def on_member_remove(member):
     await channel.send(f"{member.mention} Aramızdan ayrıldı :(")
 #-------------------------------------------------------------------------------------------------------------------#    
 #                                                         BOT KOMUTLARI
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def sSupreme(ctx, *args):
-    await ctx.send("En iyi Yasuo <@775305718143778836>")
 
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def lua(ctx, *args):
-    await ctx.send("En Lua <@589193582473117699>")
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def hileci(ctx, *args):
-    await ctx.send("Hileci Orospu Çocugu <@905532694627246150>")
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def feeder(ctx, *args):
-    await ctx.send("2-22 Singed Feeder <@533275339728617473> :flushed:")
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def floppa(ctx, *args):
-    await ctx.send("Floppa şey değilmi <@533278005368324102>")
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def hentai(ctx, *args):
-    await ctx.send("Yürüyen cinsellik <@918845035729027103>")
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def developer(ctx, *args):
-    await ctx.send("En developer <@934177779061239859>")
 #---------------------------------------------------------------------------------------------------------------------#
 #                                                            PUNCH
 @Bot.command()
@@ -280,39 +252,6 @@ async def ping(ctx):
     )
     await ctx.send(embed=pig)
 
-#-------------------------------------------------------------------------------------------------------------#
-#                                                         CM
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def cm(ctx,member: discord.Member=None):
-    cm_list = ["8=D","8==D","8===D","8======D","8========D","8===============D","8===========================D","8=D","8==D","8===D","8=D","8==D","8===D"]
-    if(member == None):
-        user = ctx.message.author
-        embed = discord.Embed(title="DİCKRATE",description=f"{user.mention} Senin Alet {random.choice(cm_list)}")
-        await ctx.send(embed = embed)
-    else:
-        embed = discord.Embed(title="DİCKRATE",description=f"{member.mention} Senin Alet {random.choice(cm_list)}")
-        await ctx.send(embed = embed)
-
-#--------------------------------------------------------------------------------------------------------------#
-#                                                          GAY
-@Bot.command(case_insenstive=True)
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def gay(ctx,member: discord.Member=None,*args):
-    gayC = random.randint(1,100)
-    if(member == None):
-        user = ctx.message.author
-        await ctx.send(f'{user.mention} %{gayC} Gay')
-    if(gayC == 100):
-        await ctx.send(f'{member.mention} Hakiki :rainbow_flag: LGBTQ+ üyesi.')
-    else:   
-        await ctx.send(f'{member.mention} %{gayC} Gay')
-#---------------------------------------------------------------------------------------------------------------#
-#                                                         UNGAY
-@Bot.command()
-@commands.cooldown(1, 5, commands.BucketType.user)
-async def ungay(ctx,member: discord.Member=None,*args):
-    await ctx.send(f"{member.mention} Gay olmadığını #ungay kullanarak kanıtladı. Artık Straight.")
 #---------------------------------------------------------------------------------------------------------------#
 #                                                        SHUTDOWN
 @Bot.command()
@@ -328,7 +267,7 @@ async def shutdown(message):
         await Bot.logout()
         
     else:
-        await message.send("Botu patron dışında kimse kapatamaz")
+        await message.send("Botu Sahibi dışında kimse kapatamaz")
         return
 #---------------------------------------------------------------------------------------------------------------#
 #                                                      CUSTOM HELP
@@ -338,7 +277,7 @@ async def help(ctx):
     em = discord.Embed(title = "Help", description = "Komutların başına # koyarak aşşağıdaki komutları kullanabilirsin.")
 
     em.add_field(name ="Moderasyon", value= "//kick • ban • unban • mute • unmute • clear • rename// ")
-    em.add_field(name ="Eğlence", value="//cm • gay • ungay • pp • punch • gif • cevir//")
+    em.add_field(name ="Eğlence", value="//pp • punch • gif • cevir//")
 
     await ctx.send(embed = em)
 #---------------------------------------------------------------------------------------------------------------#
