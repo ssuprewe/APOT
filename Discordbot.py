@@ -103,7 +103,7 @@ async def on_member_remove(member):
     channel = discord.utils.get(member.guild.text_channels, name="")#our enter exit channelname
     await channel.send(f"{member.mention} ")#ur message
 #-------------------------------------------------------------------------------------------------------------------#    
-#                                                         BOT KOMUTLARI
+#                                                         BOT COMMANDS
 
 #---------------------------------------------------------------------------------------------------------------------#
 #                                                            PUNCH
