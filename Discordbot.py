@@ -25,7 +25,7 @@ Bot = commands.Bot(command_prefix='#', intents=intents) #you can change the pref
 Bot.remove_command("help")
 roles = []
 messages = []
-pgifs = ["https://c.tenor.com/szPtb6lqakIAAAAS/beating-up-beating-up-lilo.gif","https://c.tenor.com/FFYqOVVbrJAAAAAC/markiplier-punch.gif","https://c.tenor.com/qKTBsktfhSgAAAAS/punch-blue-hoodie.gif","https://c.tenor.com/-dK24mwTyKwAAAAS/tv-shows-supernatural.gif","https://c.tenor.com/ZwjudWL5JxYAAAAC/kirby-punch.gif"]
+pgifs = []
 #-------------------------------------------------------------------------------------------------------------------#
 #                                                                Startup
 @Bot.event
