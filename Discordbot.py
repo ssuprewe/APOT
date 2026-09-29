@@ -21,7 +21,7 @@ from googletrans import Translator
 
 #                                                                Variables
 intents = discord.Intents(messages=True, guilds=True, reactions=True, members=True, presences=True)
-Bot = commands.Bot(command_prefix='#', intents=intents) #you can change the prefix 
+Bot = commands.Bot(command_prefix='#', intents=intents) # You can change the prefix
 Bot.remove_command("help")
 roles = []
 messages = []
@@ -42,7 +42,7 @@ async def on_command_error(ctx, error):
 async def ch_pr():
     await Bot.wait_until_ready()
 
-    statuses = ["#help"] #you can change statuses
+    statuses = ["#help"] # You can change statuses
 
     while not Bot.is_closed():
         status = random.choice(statuses)
@@ -55,9 +55,7 @@ Bot.loop.create_task(ch_pr())
 
 
 #-------------------------------------------------------------------------------------------------------------------#
-#                                                               MUTE
-
-
+#                                                                Mute
 @Bot.command(case_insenstive=True)
 @has_permissions(administrator=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
@@ -66,20 +64,20 @@ async def mute(ctx, member: discord.Member, *, reason=None):
         await ctx.send("please write a reason!")
         return
     guild = ctx.guild
-    muteRole = discord.utils.get(guild.roles, name = "Muted") #write mute role name
+    muteRole = discord.utils.get(guild.roles, name = "Muted") # Write mute role name
     
 
     await member.add_roles(muteRole, reason=reason)
     await ctx.send(f"{member.mention} muted. reason: {reason}")
     await member.remove_roles(testrole1)
 #-------------------------------------------------------------------------------------------------------------------#    
-#                                                             UNMUTE
+#                                                               Unmute
 @Bot.command(case_insensitive=True)
 @has_permissions(administrator=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def unmute(ctx, member: discord.Member, *, reason=None):
     guild = ctx.guild
-    muteRole = discord.utils.get(guild.roles, name = "Muted") #write mute role name
+    muteRole = discord.utils.get(guild.roles, name = "Muted") # Write mute role name
     
 
     if not muteRole:
@@ -91,22 +89,22 @@ async def unmute(ctx, member: discord.Member, *, reason=None):
     await member.add_roles(testrole1)
 
 #-------------------------------------------------------------------------------------------------------------------#
-#                                                         MEMBER JOIN
+#                                                            Member Join
 @Bot.event
 async def on_member_join(member):
-    channel = discord.utils.get(member.guild.text_channels, name="") #our enter exit channelname
-    await channel.send(f"{member.mention} welcome") #ur welcome message
+    channel = discord.utils.get(member.guild.text_channels, name="") # Enter/exit channel name
+    await channel.send(f"{member.mention} welcome") # Welcome message
 #-------------------------------------------------------------------------------------------------------------------#    
-#                                                         MEMBER REMOVE
+#                                                           Member Remove
 @Bot.event
 async def on_member_remove(member):
-    channel = discord.utils.get(member.guild.text_channels, name="")#our enter exit channelname
-    await channel.send(f"{member.mention} ")#ur message
+    channel = discord.utils.get(member.guild.text_channels, name="") # Enter/exit channel name
+    await channel.send(f"{member.mention} ") # Leave message
 #-------------------------------------------------------------------------------------------------------------------#    
-#                                                         BOT COMMANDS
+#                                                           Bot Commands
 
 #---------------------------------------------------------------------------------------------------------------------#
-#                                                            PUNCH
+#                                                               Punch
 @Bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def punch(ctx,member: discord.Member = None,*args):
@@ -116,13 +114,13 @@ async def punch(ctx,member: discord.Member = None,*args):
     user = ctx.message.author
     pemb = discord.Embed(
         colour=(discord.Colour.random()),
-        description =f"{user.name} {member.name} " #our message
+        description =f"{user.name} {member.name} " # Punch message
         )
     pemb.set_image(url=(random.choice(pgifs)))
 
     await ctx.send(embed = pemb)
 #--------------------------------------------------------------------------------------------------------------------#
-#                                                            RENAME
+#                                                               Rename
 @Bot.command(pass_context=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
 @has_permissions(administrator=True)
@@ -131,20 +129,20 @@ async def rename(ctx, member: discord.Member, nick):
     await ctx.send(f'nickname changed {member.mention} ')
 
 #-------------------------------------------------------------------------------------------------------------------#
-#                                                            CLEAR
+#                                                               Clear
 @Bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def clear(ctx, amount=5):
     await ctx.channel.purge(limit=amount)
 #-------------------------------------------------------------------------------------------------------------------#    
-#                                                            KİCK
+#                                                               Kick
 @Bot.command()
 @has_permissions(kick_members = True)
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def kick(ctx, member:discord.Member, *args, reason="yok"):
     await member.kick(reason=reason)
 #-------------------------------------------------------------------------------------------------------------------#    
-#                                                            BAN
+#                                                               Ban
 @Bot.command()
 @has_permissions(ban_members = True)
 @commands.cooldown(1, 5, commands.BucketType.user)
@@ -161,7 +159,7 @@ async def banned(ctx, member:discord.Member, *args, reason="yok"):
 	
 
 #-------------------------------------------------------------------------------------------------------------------#    
-#                                                           UNBAN
+#                                                               Unban
 @Bot.command()
 @has_permissions(ban_members = True)
 @commands.cooldown(1, 5, commands.BucketType.user)
@@ -177,7 +175,7 @@ async def unban(ctx, *, member):
             await ctx.send(f'Unbanned {user.mention}')
             return
 #-------------------------------------------------------------------------------------------------------------#
-#                                                         PİNG
+#                                                               Ping
 @Bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def ping(ctx):
@@ -190,20 +188,20 @@ async def ping(ctx):
     await ctx.send(embed=pig)
 
 #---------------------------------------------------------------------------------------------------------------#
-#                                                        SHUTDOWN
+#                                                               Shutdown
 @Bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def shutdown(message):
     id = message.author.id
-    if id == : #ur discord id
+    if id == : # Your Discord ID
        print("bot closed")
-       await message.send("") #your message
+       await message.send("") # Shutdown message
        await Bot.logout()
     else:
         await message.send("")
         return
 #---------------------------------------------------------------------------------------------------------------#
-#                                                      CUSTOM HELP
+#                                                               Custom Help
 @Bot.group(invoke_without_command=True)
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def help(ctx):
@@ -214,7 +212,7 @@ async def help(ctx):
 
     await ctx.send(embed = em)
 #---------------------------------------------------------------------------------------------------------------#
-#                                                         AVATAR
+#                                                               Avatar
 @Bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def pp(ctx, member: discord.Member = None):
@@ -226,12 +224,12 @@ async def pp(ctx, member: discord.Member = None):
     avaEmbed.set_image(url = memberAvtar)
     await ctx.send(embed = avaEmbed)
 #---------------------------------------------------------------------------------------------------------------#
-#                                                           GİF
+#                                                               GIF
 @Bot.command()
 @commands.cooldown(1, 5, commands.BucketType.user)
 async def gif(ctx, *,q="Smile"):
 
-    api_key = "" #your giphy api key
+    api_key = "" # Your GIPHY API key
     api_instance = giphy_client.DefaultApi()
 
     try:
@@ -245,7 +243,7 @@ async def gif(ctx, *,q="Smile"):
     except ApiException as e:
         print("Exception when calling Api")
 #--------------------------------------------------------------------------------------------------------------#
-#                                                          TRANSLATE
+#                                                               Translate
 @Bot.command()
 async def cevir(ctx, lang, *, thing):
     translator = Translator()
@@ -259,4 +257,4 @@ async def cevir(ctx, lang, *, thing):
 
 
 
-Bot.run('') #your bot token 
+Bot.run('') # Your bot token
